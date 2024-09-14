@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Vamshi Akarapu</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background: #1a1a1a;
+      color: #f5f5f5;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #232526, #414345);
+      color: #fff;
+      padding: 20px 0;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    header h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    nav ul li a {
+      color: #ddd;
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ff6347;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .section {
+      padding: 60px 0;
+      position: relative;
+    }
+
+    .section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ff6347;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Profile Picture */
+    .profile-picture {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      animation: fadeInRight 2s forwards;
+    }
+
+    .profile-picture img {
+      object-fit: cover;
+      width: 140px;
+      height: 130px;
+      border-radius: 50%;
+      border: 3px solid #ff6347;
+      transition: transform 0.3s ease;
+      box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+    }
+
+    .profile-picture img:hover {
+      transform: scale(1.1);
+    }
+
+    .social-icons {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .social-icons a {
+      margin: 0 10px;
+      color: #ddd;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #ff6347;
+    }
+
+    .social-icons i {
+      margin-right: 8px;
+    }
+
+    /* Skills List */
+    .skills-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .skill-category {
+      margin-bottom: 15px;
+    }
+
+    .skill-category h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #ff6347;
+    }
+
+    .skill-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .skill-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px 20px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+      font-size: 1.1rem;
+    }
+
+    .project {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+      margin-bottom: 30px;
+      line-height: 1.8;
+    }
+
+    .project-title {
+      font-size: 1.4rem;
+      color: #ff6347;
+      margin-bottom: 10px;
+    }
+
+    .project-desc {
+      font-size: 1rem;
+    }
+
+    a.page {
+      color: #ffffff;
+    }
+
+    a.page:hover {
+      color: #ff3333;
+    }
+    
+
+    /* Certifications Section */
+    .certifications-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .certification-item {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .cert-icon {
+      font-size: 2rem;
+      color: #ff6347;
+      margin-right: 20px;
+    }
+
+    .cert-content h3 {
+      margin-bottom: 10px;
+      color: #ff6347;
+    }
+
+    .cert-image {
+      width: 150px; /* Thumbnail size */
+      height: auto;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .cert-image:hover {
+      transform: scale(1.05);
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9); /* Black background with some transparency */
+    }
+
+    .lightbox-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      animation: zoomIn 0.5s;
+    }
+
+    footer {
+  background: #232526;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.5);
+}
+
+footer h3 {
+  margin-bottom: 10px;
+  color: #ff6347;
+}
+
+footer p {
+  margin-bottom: 5px;
+}
+
+footer .social-icons {
+  margin-top: 10px;
+}
+
+footer .social-icons a {
+  margin: 0 10px;
+  color: #ddd;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+footer .social-icons a:hover {
+  color: #ff6347;
+}
+
+footer .social-icons i {
+  margin-right: 8px;
+}
+
+
+    @keyframes zoomIn {
+      from { transform: scale(0.5); }
+      to { transform: scale(1); }
+    }
+
+    /* Close Button */
+    .close-lightbox {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .close-lightbox:hover,
+    .close-lightbox:focus {
+      color: #ff6347;
+    }
+
+    /* Responsive for smaller screens */
+    @media (max-width: 768px) {
+      .container {
+        width: 90%;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      .section h2 {
+        font-size: 1.5rem;
+      }
+
+      .profile-picture img {
+        width: 100px;
+        height: 100px;
+      }
+
+      .skills-list {
+        flex-direction: column;
+      }
+
+      .social-icons a {
+        font-size: 1.3rem;
+      }
+
+      .lightbox-content {
+        max-width: 90%;
+        max-height: 90%;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Vamshi Akarapu</h1>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#certifications">Certifications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <!-- Profile Picture -->
+      <div class="profile-picture">
+        <img src="C:\Users\akara\OneDrive\Pictures\Mobile photos\me 🖤\1692708597480-01.jpeg" alt="Vamshi Akarapu">
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="section">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>Hello! I'm Vamshi Akarapu,<br>
+         a Computer Science student passionate about web development and programming. I specialize in technologies like Java, Python, and JavaScript, and enjoy building responsive web applications. I’m always eager to learn new skills and take on challenges that allow me to grow and improve my technical expertise. I look forward to contributing to projects that make an impact and.. <br>
+         Welcome to my Portfolio !.
+      </p>
+    </div>
+  </section>
+
+  <section id="skills" class="section">
+    <div class="container">
+      <h2>Skills</h2>
+      <div class="skills-list">
+        <div class="skill-category">
+          <h3>Programming Languages</h3>
+          <div class="skill-items">
+            <div class="skill-item">Java</div>
+            <div class="skill-item">Python</div>
+            <div class="skill-item">PHP</div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Web Technologies</h3>
+          <div class="skill-items">
+            <div class="skill-item">HTML</div>
+            <div class="skill-item">CSS</div>
+            <div class="skill-item">JavaScript</div>
+           
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Tools & Frameworks</h3>
+          <div class="skill-items">
+            <div class="skill-item">Bootstrap</div>
+            <div class="skill-item">Eclipse</div>
+            <div class="skill-item">VS  Code</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section id="certifications" class="section">
+    <div class="container">
+      <h2>Certifications</h2>
+      <div class="certifications-list">
+        
+        <!-- Certification 1 -->
+        <div class="certification-item">
+          <div class="cert-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <div class="cert-content">
+            <h3>Learn Programming with Java - An Interactive Way</h3>
+            <p><strong>Issued by:</strong> infosys Springboard | <strong>Date:</strong> Aug 21, 2023</p>
+            <p><em>A foundational certification demonstrating my expertise in Java programming and object-oriented concepts.</em></p>
+            <!-- Certificate Image with Lightbox -->
+            <a href="C:\Users\akara\OneDrive\Desktop\Coding\web\portfolio\infosys.jpg" class="cert-image-link">
+              <img src="C:\Users\akara\OneDrive\Desktop\Coding\web\portfolio\infosys.jpg" alt="Java  Programmer  Certificate" class="cert-image">
+            </a>
+          </div>
+        </div>
+
+        <!-- Certification 2 -->
+        <div class="certification-item">
+          <div class="cert-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <div class="cert-content">
+            <h3>Fundamentals of Java Programming</h3>
+            <p><strong>Issued by:</strong> Board Infinity(Course era) | <strong>Date:</strong> April 17, 2023</p>
+            <p><em>This certification proves my ability in java and oops.</em></p>
+            <!-- Certificate Image with Lightbox -->
+            <a href="C:\Users\akara\OneDrive\Desktop\Coding\web\portfolio\java Courseera.jpg" class="cert-image-link">
+              <img src="C:\Users\akara\OneDrive\Desktop\Coding\web\portfolio\java Courseera.jpg" alt="java" class="cert-image">
+            </a>
+          </div>
+        </div>
+
+        <!-- Certification 3 -->
+        <div class="certification-item">
+          <div class="cert-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <div class="cert-content">
+            <h3>Web Development</h3>
+            <p><strong>Issued by:</strong> InternzLearn | <strong>Date:</strong> Jan 6, 2024</p>
+            <p><em>A certification validating my proficiency in web development</em></p>
+            <!-- Certificate Image with Lightbox -->
+            <a href="C:\Users\akara\OneDrive\Desktop\Coding\web\portfolio\internzlearn trng.jpg" class="cert-image-link">
+              <img src="C:\Users\akara\OneDrive\Desktop\Coding\web\portfolio\internzlearn trng.jpg" alt="Certified web Developer Certificate" class="cert-image">
+            </a>
+
+            <a href="C:\Users\akara\OneDrive\Desktop\Coding\web\portfolio\internzlearn.jpg" class="cert-image-link">
+              <img src="C:\Users\akara\OneDrive\Desktop\Coding\web\portfolio\internzlearn.jpg" alt="Certified Web Developer Certificate" class="cert-image">
+            </a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="project">
+        <h3 class="project-title">ML-based Search Engine</h3>
+        <p class="project-desc">
+          A machine learning-powered search engine that enhances search relevance based on user behavior and historical data. Built with Python, Flask, and Elasticsearch.
+        </p>
+      </div>
+
+      <div class="project">
+        <h3 class="project-title">Responsive Landing Page</h3>
+        <p class="project-desc">
+          A Landing page which is my goal to achieve.
+        </p>
+        <a href="https://legendary-dieffenbachia-24cb96.netlify.app/" class="page">Live Website</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <footer>
+    <div class="container">
+      <h3>Contact & Connect</h3>
+      <p>Feel free to reach out to me via  <a href="mailto:akarapuvamshi123@gmail.com"  class="page">Mail </a>  or connect on social media:</p>
+      <div class="social-icons">
+        <a href="https://github.com/Vamshi-swd" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/vamshi-akarapu" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/vamshi_akarapu" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://x.com/vamshi_110" target="_blank"><i class="fab fa-twitter"></i></a>
+      </div>
+      <p>&copy; 2024 Vamshi Akarapu. All rights reserved.</p>
+    </div>
+  </footer>
+  
+
+  <!-- Lightbox Modal Structure -->
+  <div id="lightbox-modal" class="lightbox-modal">
+    <span class="close-lightbox">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+  </div>
+
+  <!-- JavaScript for Lightbox -->
+  <script>
+    // Get the modal
+    var modal = document.getElementById("lightbox-modal");
+
+    // Get the image and insert it inside the modal
+    var modalImg = document.getElementById("lightbox-img");
+
+    // For each image link, open it in the modal
+    document.querySelectorAll('.cert-image-link').forEach(function(link) {
+      link.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default anchor action
+        modal.style.display = "block";
+        modalImg.src = this.href; // Set the href of the clicked link as image source
+      });
+    });
+
+    // Get the close button
+    var closeBtn = document.getElementsByClassName("close-lightbox")[0];
+
+    // When the close button is clicked, close the modal
+    closeBtn.onclick = function() { 
+      modal.style.display = "none";
+    };
+
+    // Close the modal if clicked outside the image
+    modal.onclick = function(event) {
+      if (event.target !== modalImg) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
+</body>
+</html>
